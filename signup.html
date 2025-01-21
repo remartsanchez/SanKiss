@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('./picture/wallpapersden.com_sukuna-digital-art-of-jujutsu-kaisen_1927x1080.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .signup-container {
+            width: 300px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: #fff;
+        }
+        .signup-container h2 {
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+        .alert-message {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 4px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .input-group label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: -10px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .signup-btn {
+            width: 100%;
+            padding: 0.7rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .signup-btn:hover {
+            background-color: #218838;
+        }
+        .login-link {
+            margin-top: 1rem;
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <div id="alert-message" class="alert-message"></div>
+        <form id="signup-form" onsubmit="handleSignUp(event)">
+            <div class="input-group">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                <label for="username">Username</label>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Password" required minlength="6" maxlength="6">
+                <label for="password">Password</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                <label for="confirm_password">Confirm Password</label>
+            </div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <a href="login page.html" class="login-link">Already have an account? Log in here</a>
+    </div>
+
+    <script>
+        function handleSignUp(event) {
+            event.preventDefault(); // Prevent form submission and page reload
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm_password").value;
+            const alertMessage = document.getElementById("alert-message");
+
+            // Basic validation
+            if (!username || !email || !password || !confirmPassword) {
+                alertMessage.style.display = "block";
+                alertMessage.style.backgroundColor = "rgba(255, 0, 0, 0.2)";
+                alertMessage.style.color = "#ff3333";
+                alertMessage.textContent = "All fields are required.";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alertMessage.style.display = "block";
+                alertMessage.style.backgroundColor = "rgba(255, 0, 0, 0.2)";
+                alertMessage.style.color = "#ff3333";
+                alertMessage.textContent = "Passwords do not match.";
+                return;
+            }
+
+            // Ensure password length is exactly 6 characters
+            if (password.length !== 6) {
+                alertMessage.style.display = "block";
+                alertMessage.style.backgroundColor = "rgba(255, 0, 0, 0.2)";
+                alertMessage.style.color = "#ff3333";
+                alertMessage.textContent = "Password must be exactly 6 characters long.";
+                return;
+            }
+
+            // If validation passes, show success message
+            alertMessage.style.display = "block";
+            alertMessage.style.backgroundColor = "rgba(0, 255, 0, 0.2)";
+            alertMessage.style.color = "green";
+            alertMessage.textContent = "Sign up successful! Redirecting...";
+
+            // Simulate server-side processing and redirect
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
